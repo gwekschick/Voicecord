@@ -1,20 +1,18 @@
-try:
-	from flask import Flask
-except:
-	from setup import install
-	install()
-	from flask import Flask
+from flask import Flask
 from threading import Thread
+import os
 
 app = Flask('')
 
 @app.route('/')
-def main():
-    return "Voicecord online!"
+def home():
+    return "Hello. I am alive!"
 
 def run():
-    app.run(host="0.0.0.0", port=8080)
+    # Mengambil port dari sistem Railway, jika tidak ada gunakan 8080
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
 
 def keep_alive():
-    server = Thread(target=run)
-    server.start()
+    t = Thread(target=run)
+    t.start()
