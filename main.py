@@ -17,10 +17,14 @@ print("""\
 ░░░╚═╝░░░░╚════╝░╚═╝░╚════╝░╚══════╝░╚════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░
 **Version: 1.0.0**""")
 time.sleep(0.5)
-client = discord.Client(intents=discord.Intents.default())
-Token = input("Please Enter Your Token: ")
-Id = int(input("Please Enter Your Channel ID: "))
 
+client = discord.Client(intents=discord.Intents.default())
+
+# --- BAGIAN YANG DIEDIT ---
+# Mengambil data dari Environment Variables di Render.com
+Token = os.environ.get("DISCORD_TOKEN")
+Id = int(os.environ.get("CHANNEL_ID"))
+# --------------------------
 
 @client.event
 async def on_ready():
